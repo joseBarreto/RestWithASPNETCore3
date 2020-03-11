@@ -16,6 +16,7 @@ using RestWithASPNET.Business;
 using RestWithASPNET.Business.Implementations;
 using RestWithASPNET.Repository;
 using RestWithASPNET.Repository.Implementations;
+using RestWithASPNET.Repository.Generic;
 
 namespace RestWithASPNET
 {
@@ -26,7 +27,7 @@ namespace RestWithASPNET
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-           
+
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -36,8 +37,12 @@ namespace RestWithASPNET
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connectionString));
 
             services.AddControllers();
+
+            services.AddScoped<IBookBusiness, BookBusinessImpl>();
             services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
             services.AddScoped<IPersonRepository, PersonRepositoryImpl>();
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
             services.AddApiVersioning();
         }
 

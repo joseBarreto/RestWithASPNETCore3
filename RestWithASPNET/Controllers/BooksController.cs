@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestWithASPNET.Business;
 using RestWithASPNET.Model;
 
 namespace RestWithASPNET.Controllers
@@ -13,59 +14,60 @@ namespace RestWithASPNET.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class BooksController : ControllerBase
     {
+        private readonly IBookBusiness _bookBusiness;
 
+        public BooksController(IBookBusiness bookBusiness)
+        {
+            _bookBusiness = bookBusiness;
+        }
 
-        // GET: api/Person
+        // GET: api/Book
         [HttpGet]
         public IActionResult Get()
         {
-            //return Ok(_personBusiness.FindAll());
-            return Ok();
+            return Ok(_bookBusiness.FindAll());
+
         }
 
-        // GET: api/Person/5
-        [HttpGet("{id}", Name = "Get")]
+        // GET: api/Book/5
+        [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            //var person = _personBusiness.FindById(id);
-            //if (person == null)
-            //    return NotFound();
+            var book = _bookBusiness.FindById(id);
+            if (book == null)
+                return NotFound();
 
-            //return Ok(person);
-            return Ok();
+            return Ok(book);
         }
 
-        // POST: api/Person
+        // POST: api/Book
         [HttpPost]
         public IActionResult Post([FromBody] Book book)
         {
+            if (book == null)
+                return BadRequest();
 
-            //if (person == null)
-            //    return BadRequest();
-
-            //return new ObjectResult(_personBusiness.Create(book));
-            return Ok();
+            return new ObjectResult(_bookBusiness.Create(book));
         }
 
-        // PUT: api/Person
+        // PUT: api/Book
         [HttpPut]
         public IActionResult Put([FromBody] Book book)
         {
-            //if (person == null)
-            //    return BadRequest();
+            if (book == null)
+                return BadRequest();
 
-            //var result = _personBusiness.Update(book);
-            //if (result == null) return BadRequest();
+            var result = _bookBusiness.Update(book);
+            if (result == null) return BadRequest();
 
-            //return new ObjectResult(result);
-            return Ok();
+            return new ObjectResult(result);
         }
 
-        // DELETE: api/Person/5
+        // DELETE: api/Book/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            // _personBusiness.Delete(id);
+            _bookBusiness.Delete(id);
             return NoContent();
         }
     }

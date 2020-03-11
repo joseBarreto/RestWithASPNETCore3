@@ -1,4 +1,5 @@
 ﻿using RestWithASPNET.Model;
+using RestWithASPNET.Repository.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,34 +9,41 @@ namespace RestWithASPNET.Business.Implementations
 {
     public class BookBusinessImpl : IBookBusiness
     {
-        public Book Create(Book Book)
+        private readonly IRepository<Book> _repository;
+
+        public BookBusinessImpl(IRepository<Book> repository)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+        }
+
+        public Book Create(Book book)
+        {
+            return _repository.Create(book);
         }
 
         public void Delete(long id)
         {
-            throw new NotImplementedException();
+            _repository.Delete(id);
         }
 
         public bool Exist(long? id)
         {
-            throw new NotImplementedException();
+            return _repository.Exist(id);
         }
 
         public IList<Book> FindAll()
         {
-            throw new NotImplementedException();
+            return _repository.FindAll();
         }
 
         public Book FindById(long? id)
         {
-            throw new NotImplementedException();
+            return _repository.FindById(id);
         }
 
-        public Book Update(Book Book)
+        public Book Update(Book book)
         {
-            throw new NotImplementedException();
+            return _repository.Update(book);
         }
     }
 }

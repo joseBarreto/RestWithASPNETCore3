@@ -1,34 +1,36 @@
-﻿using RestWithASPNET.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using RestWithASPNET.Model.Base;
 using RestWithASPNET.Model.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace RestWithASPNET.Repository.Implementations
+namespace RestWithASPNET.Repository.Generic
 {
-    public class PersonRepositoryImpl : IPersonRepository
+    public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private MySqlContext _context;
+        private readonly MySqlContext _context;
+        private readonly DbSet<T> dataSet;
 
-        public PersonRepositoryImpl(MySqlContext context)
+        public GenericRepository(MySqlContext context)
         {
             _context = context;
+            dataSet = _context.Set<T>();
         }
 
-        public Person Create(Person person)
+        public T Create(T item)
         {
             try
             {
-                _context.Add(person);
+                dataSet.Add(item);
                 _context.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return person;
+            return item;
         }
 
         public void Delete(long id)
@@ -38,7 +40,7 @@ namespace RestWithASPNET.Repository.Implementations
                 if (Exist(id))
                 {
                     var result = FindById(id);
-                    _context.Persons.Remove(result);
+                    dataSet.Remove(result);
                     _context.SaveChanges();
                 }
 
@@ -51,42 +53,41 @@ namespace RestWithASPNET.Repository.Implementations
 
         public bool Exist(long? id)
         {
-            return _context.Persons.Any(p => p.Id.Equals(id));
+            return dataSet.Any(p => p.Id.Equals(id));
         }
 
-        public IList<Person> FindAll()
+        public IList<T> FindAll()
         {
-            return _context.Persons.ToList();
+            return dataSet.ToList();
         }
 
-        public Person FindById(long? id)
+        public T FindById(long? id)
         {
-            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+            return dataSet.SingleOrDefault(p => p.Id.Equals(id));
         }
 
-        public Person Update(Person person)
+        public T Update(T item)
         {
             try
             {
-                if (Exist(person.Id))
+                if (Exist(item.Id))
                 {
-                    var result = FindById(person.Id);
-                    _context.Entry(result).CurrentValues.SetValues(person); 
+                    var result = FindById(item.Id);
+                    _context.Entry(result).CurrentValues.SetValues(item);
                     _context.SaveChanges();
                 }
                 else
                 {
                     return null;
                 }
-              
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return person;
+            return item;
         }
-      
     }
 }

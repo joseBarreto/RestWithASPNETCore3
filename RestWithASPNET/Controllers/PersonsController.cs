@@ -9,7 +9,7 @@ namespace RestWithASPNET.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class PersonsController : ControllerBase
     {
-        private IPersonBusiness _personBusiness;
+        private readonly IPersonBusiness _personBusiness;
 
         public PersonsController(IPersonBusiness personBusiness)
         {
@@ -24,7 +24,7 @@ namespace RestWithASPNET.Controllers
         }
 
         // GET: api/Person/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
             var person = _personBusiness.FindById(id);
