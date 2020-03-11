@@ -1,27 +1,24 @@
-﻿using RestWithASPNET.Model;
-using RestWithASPNET.Model.Context;
-using RestWithASPNET.Repository;
+﻿using RestWithASPNET.Data.Converters;
+using RestWithASPNET.Data.VO;
+using RestWithASPNET.Model;
 using RestWithASPNET.Repository.Generic;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RestWithASPNET.Business.Implementations
 {
     public class PersonBusinessImpl : IPersonBusiness
     {
         private readonly IRepository<Person> _repository;
-
+        private readonly PersonConverter _converter;
         public PersonBusinessImpl(IRepository<Person> repository)
         {
             _repository = repository;
+            _converter = new PersonConverter();
         }
 
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
-            return _repository.Create(person);
+            return _converter.Parse(_repository.Create(_converter.Parse(person)));
         }
 
         public void Delete(long id)
@@ -34,20 +31,20 @@ namespace RestWithASPNET.Business.Implementations
             return _repository.Exist(id);
         }
 
-        public IList<Person> FindAll()
+        public IList<PersonVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.ParseList(_repository.FindAll());
         }
 
-        public Person FindById(long? id)
+        public PersonVO FindById(long? id)
         {
-            return _repository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
         }
 
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return _repository.Update(person);
+            return _converter.Parse(_repository.Update(_converter.Parse(person)));
         }
-      
+
     }
 }

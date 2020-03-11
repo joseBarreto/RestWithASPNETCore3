@@ -1,4 +1,5 @@
-﻿using RestWithASPNET.Model;
+﻿using RestWithASPNET.Data.VO;
+using RestWithASPNET.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ namespace RestWithASPNET.Business
 {
     public interface IBookBusiness
     {
-        Book Create(Book Book);
-        Book FindById(long? id);
-        IList<Book> FindAll();
-        Book Update(Book Book);
+        BookVO Create(BookVO Book);
+        BookVO FindById(long? id);
+        IList<BookVO> FindAll();
+        BookVO Update(BookVO Book);
         void Delete(long id);
         bool Exist(long? id);
     }

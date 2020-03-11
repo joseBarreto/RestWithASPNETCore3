@@ -17,6 +17,7 @@ using RestWithASPNET.Business.Implementations;
 using RestWithASPNET.Repository;
 using RestWithASPNET.Repository.Implementations;
 using RestWithASPNET.Repository.Generic;
+using Microsoft.Net.Http.Headers;
 
 namespace RestWithASPNET
 {
@@ -36,14 +37,21 @@ namespace RestWithASPNET
             var connectionString = Configuration["MySqlConnection:MySqlConnectionString"];
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connectionString));
 
-            services.AddControllers();
+            services
+                .AddControllers(options =>
+                {
+                    options.RespectBrowserAcceptHeader = true;
+                    options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
+                    options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+                })
+                .AddXmlSerializerFormatters();
 
             services.AddScoped<IBookBusiness, BookBusinessImpl>();
             services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImpl>();
+            //services.AddScoped<IPersonRepository, PersonRepositoryImpl>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
-            services.AddApiVersioning();
+            services.AddApiVersioning(option => option.ReportApiVersions = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

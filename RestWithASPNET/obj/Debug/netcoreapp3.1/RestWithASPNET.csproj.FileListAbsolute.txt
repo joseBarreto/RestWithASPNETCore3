@@ -151,11 +151,11 @@ C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.csprojAssemblyReference.cache
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\staticwebassets\RestWithASPNET.StaticWebAssets.Manifest.cache
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\staticwebassets\RestWithASPNET.StaticWebAssets.xml
-C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.AssemblyInfoInputs.cache
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.AssemblyInfo.cs
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.RazorTargetAssemblyInfo.cache
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.csproj.CopyComplete
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.dll
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.pdb
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.MvcApplicationPartsAssemblyInfo.cache
