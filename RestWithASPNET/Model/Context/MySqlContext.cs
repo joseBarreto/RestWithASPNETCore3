@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RestWithASPNET.Model;
 
 namespace RestWithASPNET.Model.Context
 {
@@ -18,5 +19,6 @@ namespace RestWithASPNET.Model.Context
 
         }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<RestWithASPNET.Model.Book> Book { get; set; }
     }
 }
