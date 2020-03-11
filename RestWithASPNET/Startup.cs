@@ -18,6 +18,8 @@ using RestWithASPNET.Repository;
 using RestWithASPNET.Repository.Implementations;
 using RestWithASPNET.Repository.Generic;
 using Microsoft.Net.Http.Headers;
+using Tapioca.HATEOAS;
+using RestWithASPNET.HyperMedia;
 
 namespace RestWithASPNET
 {
@@ -46,11 +48,14 @@ namespace RestWithASPNET
                 })
                 .AddXmlSerializerFormatters();
 
-            services.AddScoped<IBookBusiness, BookBusinessImpl>();
-            services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
-            //services.AddScoped<IPersonRepository, PersonRepositoryImpl>();
-            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
+            services.AddSingleton(filterOptions);
+
+            services.AddScoped<IBookBusiness, BookBusinessImpl>();
+            services.AddScoped<IPersonBusiness, PersonBusinessImpl>();            
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             services.AddApiVersioning(option => option.ReportApiVersions = true);
         }
 

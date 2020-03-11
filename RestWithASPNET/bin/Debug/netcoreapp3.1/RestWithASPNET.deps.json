@@ -34,6 +34,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
           "MySql.Data": "8.0.19",
           "Pomelo.EntityFrameworkCore.MySql": "3.1.1",
+          "Tapioca.HATEOAS": "1.0.4",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -2709,6 +2710,20 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
+        }
+      },
+      "Tapioca.HATEOAS/1.0.4": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.0"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/Tapioca.HATEOAS.dll": {
+            "assemblyVersion": "1.0.4.0",
+            "fileVersion": "1.0.4.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp2.0/Tapioca.HATEOAS.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -5765,6 +5780,13 @@
       "sha512": "sha512-Zm2BdeanuncYs3NhCj4c9e1x3EXFzFBVv2wPEc/Dj4ZbI9R8ecLSR5frAsx4zJCPBtKQreQ7Q/KxJEohJZbfzA==",
       "path": "system.xml.xpath.xmldocument/4.0.1",
       "hashPath": "system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
+    },
+    "Tapioca.HATEOAS/1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8hp6oNzJV8nbOl6eevAxo0pZsdYIFUng3Pyg0/re47p8e3d0cViG+qmBz3AayrO+CnZ8jqqrkkr264l/8P5QOw==",
+      "path": "tapioca.hateoas/1.0.4",
+      "hashPath": "tapioca.hateoas.1.0.4.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
       "type": "referenceassembly",
