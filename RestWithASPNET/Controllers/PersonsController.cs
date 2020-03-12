@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestWithASPNET.Business;
 using RestWithASPNET.Data.VO;
+using Swashbuckle.Swagger.Annotations;
+using System.Collections.Generic;
 using Tapioca.HATEOAS;
 
 namespace RestWithASPNET.Controllers
@@ -17,16 +19,22 @@ namespace RestWithASPNET.Controllers
             _personBusiness = personBusiness;
         }
 
-        // GET: api/Person
         [HttpGet]
+        [SwaggerResponse((200), Type = typeof(List<PersonVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
         }
 
-        // GET: api/Person/5
         [HttpGet("{id}")]
+        [SwaggerResponse((200), Type = typeof(PersonVO))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -37,8 +45,11 @@ namespace RestWithASPNET.Controllers
             return Ok(person);
         }
 
-        // POST: api/Person
         [HttpPost]
+        [SwaggerResponse((201), Type = typeof(PersonVO))]        
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {
@@ -49,8 +60,10 @@ namespace RestWithASPNET.Controllers
             return new ObjectResult(_personBusiness.Create(person));
         }
 
-        // PUT: api/Person
         [HttpPut]
+        [SwaggerResponse((202), Type = typeof(PersonVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
@@ -63,8 +76,10 @@ namespace RestWithASPNET.Controllers
             return new ObjectResult(result);
         }
 
-        // DELETE: api/Person/5
         [HttpDelete("{id}")]
+        [SwaggerResponse((204), Type = typeof(PersonVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {

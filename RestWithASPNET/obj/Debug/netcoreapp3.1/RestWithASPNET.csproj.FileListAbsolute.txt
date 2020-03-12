@@ -161,7 +161,6 @@ C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.csprojAssemblyReference.cache
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Swashbuckle.Core.dll

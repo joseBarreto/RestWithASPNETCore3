@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestWithASPNET.Business;
 using RestWithASPNET.Data.VO;
+using Tapioca.HATEOAS;
 
 namespace RestWithASPNET.Controllers
 {
@@ -16,16 +17,16 @@ namespace RestWithASPNET.Controllers
             _bookBusiness = bookBusiness;
         }
 
-        // GET: api/Book
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_bookBusiness.FindAll());
 
         }
 
-        // GET: api/Book/5
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var book = _bookBusiness.FindById(id);
@@ -35,8 +36,8 @@ namespace RestWithASPNET.Controllers
             return Ok(book);
         }
 
-        // POST: api/Book
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null)
@@ -45,8 +46,8 @@ namespace RestWithASPNET.Controllers
             return new ObjectResult(_bookBusiness.Create(book));
         }
 
-        // PUT: api/Book
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null)
@@ -58,8 +59,8 @@ namespace RestWithASPNET.Controllers
             return new ObjectResult(result);
         }
 
-        // DELETE: api/Book/5
         [HttpDelete("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {
             _bookBusiness.Delete(id);
