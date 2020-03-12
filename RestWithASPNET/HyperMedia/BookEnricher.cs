@@ -8,12 +8,12 @@ using Tapioca.HATEOAS;
 
 namespace RestWithASPNET.HyperMedia
 {
-    public class PersonEnricher : ObjectContentResponseEnricher<PersonVO>
+    public class BookEnricher : ObjectContentResponseEnricher<BookVO>
     {
-        protected override Task EnrichModel(PersonVO content, IUrlHelper urlHelper)
+        protected override Task EnrichModel(BookVO content, IUrlHelper urlHelper)
         {
             var path = "http://localhost:52098";
-            var url = new { controller = "api/v1/persons", id = content.Id };
+            var url = new { controller = "api/v1/books", id = content.Id };
             string heref;
             var rel = RelationType.self;
 

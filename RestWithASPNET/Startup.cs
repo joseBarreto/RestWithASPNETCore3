@@ -20,6 +20,9 @@ using RestWithASPNET.Repository.Generic;
 using Microsoft.Net.Http.Headers;
 using Tapioca.HATEOAS;
 using RestWithASPNET.HyperMedia;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.Swagger;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace RestWithASPNET
 {
@@ -51,12 +54,21 @@ namespace RestWithASPNET
 
             var filterOptions = new HyperMediaFilterOptions();
             filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
+            filterOptions.ObjectContentResponseEnricherList.Add(new BookEnricher());
             services.AddSingleton(filterOptions);
 
             services.AddScoped<IBookBusiness, BookBusinessImpl>();
-            services.AddScoped<IPersonBusiness, PersonBusinessImpl>();            
+            services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             services.AddApiVersioning(option => option.ReportApiVersions = true);
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "RestFull API with ASP.NET Core 3.1",
+                    Version = "v1"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,16 +79,27 @@ namespace RestWithASPNET
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+                
+            });
+
+            var options = new RewriteOptions();
+            options.AddRedirect("^$", "swagger");
+            app.UseRewriter(options);
+
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+                endpoints.MapControllerRoute("DefaultApi", "{controller=Values}/{id?}");
             });
+
+
         }
     }
 }
