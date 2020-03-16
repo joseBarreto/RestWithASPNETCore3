@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestWithASPNET.Business;
 using RestWithASPNET.Data.VO;
+using Swashbuckle.Swagger.Annotations;
+using System.Collections.Generic;
 using Tapioca.HATEOAS;
 
 namespace RestWithASPNET.Controllers
@@ -18,6 +21,11 @@ namespace RestWithASPNET.Controllers
         }
 
         [HttpGet]
+        [SwaggerResponse((200), Type = typeof(List<BookVO>))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -26,6 +34,11 @@ namespace RestWithASPNET.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerResponse((200), Type = typeof(BookVO))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -37,6 +50,10 @@ namespace RestWithASPNET.Controllers
         }
 
         [HttpPost]
+        [SwaggerResponse((201), Type = typeof(BookVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] BookVO book)
         {
@@ -47,6 +64,9 @@ namespace RestWithASPNET.Controllers
         }
 
         [HttpPut]
+        [SwaggerResponse((202), Type = typeof(BookVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] BookVO book)
         {
@@ -60,6 +80,10 @@ namespace RestWithASPNET.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerResponse((204), Type = typeof(BookVO))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {

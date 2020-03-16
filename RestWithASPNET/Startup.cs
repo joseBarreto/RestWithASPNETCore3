@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +23,10 @@ using RestWithASPNET.HyperMedia;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.Swagger;
 using Microsoft.AspNetCore.Rewrite;
+using RestWithASPNET.Security.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestWithASPNET
 {
@@ -42,6 +46,53 @@ namespace RestWithASPNET
             var connectionString = Configuration["MySqlConnection:MySqlConnectionString"];
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connectionString));
 
+
+            var signingConfigurations = new SigningConfigurations();
+            services.AddSingleton(signingConfigurations);
+
+            var tokenConfigurations = new TokenConfiguration();
+
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                Configuration.GetSection("TokenConfigurations")
+            )
+            .Configure(tokenConfigurations);
+
+            services.AddSingleton(tokenConfigurations);
+
+
+            services.AddAuthentication(authOptions =>
+            {
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(bearerOptions =>
+            {
+                var paramsValidation = bearerOptions.TokenValidationParameters;
+                paramsValidation.IssuerSigningKey = signingConfigurations.Key;
+                paramsValidation.ValidAudience = tokenConfigurations.Audience;
+                paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
+
+                // Validates the signing of a received token
+                paramsValidation.ValidateIssuerSigningKey = true;
+
+                // Checks if a received token is still valid
+                paramsValidation.ValidateLifetime = true;
+
+                // Tolerance time for the expiration of a token (used in case
+                // of time synchronization problems between different
+                // computers involved in the communication process)
+                paramsValidation.ClockSkew = TimeSpan.Zero;
+            });
+
+            // Enables the use of the token as a means of
+            // authorizing access to this project's resources
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+                    .RequireAuthenticatedUser().Build());
+            });
+
             services
                 .AddControllers(options =>
                 {
@@ -59,6 +110,8 @@ namespace RestWithASPNET
 
             services.AddScoped<IBookBusiness, BookBusinessImpl>();
             services.AddScoped<IPersonBusiness, PersonBusinessImpl>();
+            services.AddScoped<ILoginBusiness, LoginBusinessImpl>();
+            services.AddScoped<IUserRepository, UserRepositoryImpl>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             services.AddApiVersioning(option => option.ReportApiVersions = true);
             services.AddSwaggerGen(s =>
@@ -83,7 +136,7 @@ namespace RestWithASPNET
             app.UseSwaggerUI(s =>
             {
                 s.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
-                
+
             });
 
             var options = new RewriteOptions();

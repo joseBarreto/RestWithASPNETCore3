@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestWithASPNET.Business;
 using RestWithASPNET.Data.VO;
 using Swashbuckle.Swagger.Annotations;
@@ -24,6 +25,7 @@ namespace RestWithASPNET.Controllers
         [SwaggerResponse(204)]
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -35,6 +37,7 @@ namespace RestWithASPNET.Controllers
         [SwaggerResponse(204)]
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -49,8 +52,8 @@ namespace RestWithASPNET.Controllers
         [SwaggerResponse((201), Type = typeof(PersonVO))]        
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
-        [TypeFilter(typeof(HyperMediaFilter))]
-        [TypeFilter(typeof(HyperMediaFilter))]
+        [Authorize("Bearer")]
+        [TypeFilter(typeof(HyperMediaFilter))]        
         public IActionResult Post([FromBody] PersonVO person)
         {
 
@@ -64,6 +67,7 @@ namespace RestWithASPNET.Controllers
         [SwaggerResponse((202), Type = typeof(PersonVO))]
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
@@ -80,6 +84,7 @@ namespace RestWithASPNET.Controllers
         [SwaggerResponse((204), Type = typeof(PersonVO))]
         [SwaggerResponse(400)]
         [SwaggerResponse(401)]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {

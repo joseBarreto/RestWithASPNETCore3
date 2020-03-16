@@ -164,5 +164,13 @@ C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Swashbuckle.Core.dll
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.csprojAssemblyReference.cache
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\josed\source\repos\RestWithASPNET\RestWithASPNET\obj\Debug\netcoreapp3.1\RestWithASPNET.MvcApplicationPartsAssemblyInfo.cache
