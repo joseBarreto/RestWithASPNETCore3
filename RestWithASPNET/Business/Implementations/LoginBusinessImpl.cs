@@ -25,7 +25,7 @@ namespace RestWithASPNET.Business.Implementations
             _tokenConfiguration = tokenConfiguration;
         }
 
-        public object FindByLogin(User user)
+        public object FindByLogin(UserVO user)
         {
             bool credentialIsValid = false;
 

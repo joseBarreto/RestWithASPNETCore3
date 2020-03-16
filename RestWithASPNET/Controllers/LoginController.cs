@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestWithASPNET.Business;
+using RestWithASPNET.Data.VO;
 using RestWithASPNET.Model;
 
 namespace RestWithASPNET.Controllers
@@ -19,7 +20,7 @@ namespace RestWithASPNET.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public object Post([FromBody] User user)
+        public object Post([FromBody] UserVO user)
         {
 
             if (user == null)
