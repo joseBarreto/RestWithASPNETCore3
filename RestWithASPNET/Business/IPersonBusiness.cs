@@ -9,6 +9,7 @@ namespace RestWithASPNET.Business
         PersonVO Create(PersonVO person);
         PersonVO FindById(long? id);
         IList<PersonVO> FindAll();
+        IList<PersonVO> FindByName(string firstName, string lastName);
         PersonVO Update(PersonVO person);
         void Delete(long id);
         bool Exist(long? id);

@@ -8,9 +8,9 @@ namespace RestWithASPNET.Business.Implementations
 {
     public class PersonBusinessImpl : IPersonBusiness
     {
-        private readonly IRepository<Person> _repository;
+        private readonly IPersonRepository _repository;
         private readonly PersonConverter _converter;
-        public PersonBusinessImpl(IRepository<Person> repository)
+        public PersonBusinessImpl(IPersonRepository repository)
         {
             _repository = repository;
             _converter = new PersonConverter();
@@ -34,6 +34,11 @@ namespace RestWithASPNET.Business.Implementations
         public IList<PersonVO> FindAll()
         {
             return _converter.ParseList(_repository.FindAll());
+        }
+
+        public IList<PersonVO> FindByName(string firstName, string lastName)
+        {
+            return _converter.ParseList(_repository.FindByName(firstName, lastName));
         }
 
         public PersonVO FindById(long? id)
